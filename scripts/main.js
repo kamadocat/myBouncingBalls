@@ -7,7 +7,7 @@ const height = canvas.height = window.innerHeight;
 
 
 function random(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+    return (Math.random()* (max - min) + min);
 }
 
 function randomRGB(min, max) {
@@ -124,17 +124,23 @@ class Ball {
 
 
 const balls = [];
+const smax = Math.min(width, height);
+const maxSize = 50 / 1500 * smax;
+const minSize = 70 / 1500 * smax;
+const maxSpeed = 12 / 1500 * smax;
+const minSpeed = -maxSpeed;
 
 while (balls.length < 30) {
-    const size = random(20, 30);
+    const size = random(minSize, maxSize);
     const ball = new Ball(
         random(0 + size, width - size),
         random(0 + size, height - size),
-        random(-7, 7),
-        random(-7, 7),
+        random(minSpeed, maxSpeed),
+        random(minSpeed, maxSpeed),
         randomRGB(130, 255),
         size
     );
+    console.log(size);
 
     balls.push(ball)
 }
@@ -153,5 +159,7 @@ function loop() {
     requestAnimationFrame(loop)
 }
 
+console.log(width);
+console.log(height);
 
 loop();
